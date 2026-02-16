@@ -1,26 +1,143 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Colors */
+  --color-parchment: #F9F8F6;
+  --color-off-white: #FEFEFE;
+  --color-charcoal: #333333;
+  --color-text-secondary: #555555;
+
+  --color-vatican-gold: #FFCC00;
+  --color-antique-gold: #D4AF37;
+  --color-cardinal-red: #BD2031;
+  --color-maria-blue: #0033A0;
+
+  /* Fonts */
+  --font-serif: var(--font-lora), Georgia, serif;
+  --font-display: var(--font-cormorant), "Times New Roman", serif;
+
+  /* Spacing/Layout */
+  --max-w-reading: 65ch;
+  --leading-reading: 1.75;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* Base Styles */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-serif);
+  background-color: var(--color-parchment);
+  color: var(--color-charcoal);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+}
+
+/* Custom Utility: Prose Academic */
+@utility prose-academic {
+  @apply prose prose-lg prose-stone max-w-[65ch] mx-auto;
+
+  /* Headings */
+  @apply prose-headings:font-display prose-headings:text-cardinal-red;
+  @apply prose-h1:text-4xl prose-h1:font-bold prose-h1:mb-6 prose-h1:mt-12;
+  @apply prose-h2:text-3xl prose-h2:font-semibold prose-h2:mb-4 prose-h2:mt-10;
+  @apply prose-h2:border-b prose-h2:border-vatican-gold/30 prose-h2:pb-2;
+  @apply prose-h3:text-2xl prose-h3:font-medium prose-h3:mb-3 prose-h3:mt-8;
+
+  /* Body */
+  @apply prose-p:leading-[1.75] prose-p:mb-4 prose-p:text-justify;
+
+  /* Links */
+  @apply prose-a:text-maria-blue prose-a:no-underline hover:prose-a:underline;
+  @apply prose-a:font-medium prose-a:transition-all;
+
+  /* Blockquotes */
+  @apply prose-blockquote:border-l-4 prose-blockquote:border-cardinal-red;
+  @apply prose-blockquote:bg-off-white prose-blockquote:italic;
+  @apply prose-blockquote:pl-6 prose-blockquote:py-2 prose-blockquote:my-6;
+
+  /* Tables */
+  @apply prose-table:border-collapse prose-table:w-full prose-table:my-8;
+  @apply prose-thead:bg-maria-blue/10;
+  @apply prose-th:border prose-th:border-gray-300 prose-th:p-3;
+  @apply prose-th:text-left prose-th:font-semibold;
+  @apply prose-td:border prose-td:border-gray-300 prose-td:p-3;
+  @apply prose-td:align-top;
+
+  /* Misc */
+  @apply prose-strong:text-charcoal prose-strong:font-semibold;
+  @apply prose-li:mb-1;
+  @apply prose-code:text-maria-blue prose-code:font-medium;
+  @apply prose-code:before:content-[''] prose-code:after:content-[''];
+}
+
+/* Scrollbar styling cho TOC */
+.toc-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-cardinal-red) transparent;
+}
+
+.toc-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.toc-scrollbar::-webkit-scrollbar-thumb {
+  background-color: var(--color-cardinal-red);
+  border-radius: 3px;
+}
+
+/* Academic Features */
+
+/* Drop Cap */
+.drop-cap::first-letter {
+  float: left;
+  font-family: var(--font-display);
+  font-size: 3.5rem;
+  line-height: 0.8;
+  font-weight: 700;
+  color: var(--color-cardinal-red);
+  margin-right: 0.5rem;
+  margin-top: 0.2rem;
+}
+
+/* Print Styles */
+@media print {
+  @page {
+    margin: 2cm;
+  }
+
+  body {
+    background-color: white;
+    color: black;
+  }
+
+  nav,
+  header,
+  footer,
+  .toc-scrollbar,
+  aside {
+    display: none !important;
+  }
+
+  main {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+  }
+
+  a {
+    text-decoration: none !important;
+    color: black !important;
+  }
+
+  /* Show URL after links */
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+  }
 }

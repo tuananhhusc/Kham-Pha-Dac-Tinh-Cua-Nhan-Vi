@@ -1,65 +1,79 @@
-import Image from "next/image";
+import TableOfContents from '@/components/TableOfContents';
+import ResearchContent from './content.mdx';
+import ReadingProgress from '@/components/ReadingProgress';
+import MobileTOC from '@/components/MobileTOC';
 
-export default function Home() {
+const tocItems = [
+  { id: 'intro', title: '1. Dẫn nhập về Khái niệm', level: 1 },
+  { id: 'section-2', title: '2. Đặc tính Chiều sâu và Tính Chủ thể', level: 1 },
+  { id: 'section-2-1', title: '2.1. Tính Thống nhất Thể xác và Tinh thần', level: 2 },
+  { id: 'section-2-2', title: '2.2. Tính Liên chủ thể', level: 2 },
+  { id: 'section-3', title: '3. Trào lưu Thuyết Nhân vị', level: 1 },
+  { id: 'section-3-1', title: '3.1. Emmanuel Mounier', level: 2 },
+  { id: 'section-3-2', title: '3.2. Jacques Maritain', level: 2 },
+  { id: 'section-4', title: '4. Giao lộ Chính trị Quốc tế', level: 1 },
+  { id: 'section-4-1', title: '4.1. Tuyên ngôn Quốc tế Nhân quyền', level: 2 },
+  { id: 'section-4-2', title: '4.2. Thuyết Cần Lao Nhân Vị Việt Nam', level: 2 },
+  { id: 'section-5', title: '5. Thần học và Học thuyết Công giáo', level: 1 },
+  { id: 'section-5-1', title: '5.1. Nguồn gốc Thần linh', level: 2 },
+  { id: 'section-5-2', title: '5.2. Đoàn kết và Công bằng Xã hội', level: 2 },
+  { id: 'section-6', title: '6. Tâm lý học và Triết lý Phương Đông', level: 1 },
+  { id: 'section-6-1', title: '6.1. Liệu pháp Trọng tâm Nhân vị', level: 2 },
+  { id: 'section-6-2', title: '6.2. Nhân vị và Vô Ngã Phật giáo', level: 2 },
+  { id: 'section-7', title: '7. Thách thức Đạo đức Sinh học', level: 1 },
+  { id: 'section-7-1', title: '7.1. Kỹ thuật Chỉnh sửa Gen (CRISPR)', level: 2 },
+  { id: 'section-7-2', title: '7.2. Giao diện Não - Máy tính', level: 2 },
+  { id: 'section-8', title: '8. Trí tuệ Nhân tạo và Nhân vị Điện tử', level: 1 },
+  { id: 'section-8-1', title: '8.1. Tranh luận Pháp lý về AI', level: 2 },
+  { id: 'section-8-2', title: '8.2. Đạo đức học AI Dựa trên Phẩm giá', level: 2 },
+  { id: 'section-9', title: '9. Kết luận', level: 1 },
+  { id: 'references', title: 'Nguồn trích dẫn', level: 1 },
+];
+
+export default function HomePage() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <div className="min-h-screen">
+      <ReadingProgress />
+      <MobileTOC items={tocItems} />
+      {/* Header với gradient Maria Blue -> Cardinal Red */}
+      <header className="bg-gradient-to-r from-maria-blue via-cardinal-red/90 to-cardinal-red text-white py-20 shadow-lg">
+        <div className="container mx-auto px-4 text-center">
+          <h1 className="font-display text-5xl md:text-6xl font-bold mb-6 drop-shadow-md">
+            Khám Phá Đặc Tính Của Nhân Vị
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="text-xl md:text-2xl font-light max-w-4xl mx-auto leading-relaxed">
+            Nền tảng Bản thể luận, Sự phát triển Lịch sử và Những Thách thức
+            trong Kỷ nguyên Công nghệ Đương đại
           </p>
+          {/* Removed subtitle */}
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </header>
+
+      {/* Main Content với 2-column layout */}
+      <div className="container mx-auto px-4 py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-8 xl:gap-12">
+          {/* TOC Sidebar - Hidden trên mobile */}
+          <aside className="hidden lg:block">
+            <TableOfContents items={tocItems} />
+          </aside>
+
+          {/* Research Content */}
+          <main className="prose-academic min-w-0">
+            <ResearchContent />
+          </main>
         </div>
-      </main>
+      </div>
+
+      {/* Footer */}
+      <footer className="bg-charcoal text-white/80 py-10 mt-20 border-t-4 border-vatican-gold">
+        <div className="container mx-auto px-4">
+          <div className="text-center">
+            <p className="text-lg font-semibold mb-2">© 2026 Nghiên cứu Học thuật Nhân Vị</p>
+            {/* Removed citation count */}
+            {/* Removed topic tags */}
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
