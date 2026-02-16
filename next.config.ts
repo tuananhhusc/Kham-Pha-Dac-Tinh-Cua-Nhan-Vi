@@ -4,7 +4,6 @@ import type { NextConfig } from 'next'
 const nextConfig: NextConfig = {
   pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
   output: 'export',
-  basePath: '/Kham-Pha-Dac-Tinh-Cua-Nhan-Vi',
   images: {
     unoptimized: true,
   },
